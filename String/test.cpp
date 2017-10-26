@@ -6,17 +6,18 @@
  ************************************************************************/
 
 #include<iostream>
-#include"String.hpp"
+#include<string.h>
+#include"Stringcow.hpp"
 using namespace std;
 
 
 int main()
 {
-    String s1("1111111");
+    Stringcow s1("1111111");
     s1.Print();
-    String s2("2222222");
+    Stringcow s2("2222222");
     s2.Print();
-    String s3(s1);
+    Stringcow s3(s1);
     s3.Print();
     s3=s2;
     s3.Print();
