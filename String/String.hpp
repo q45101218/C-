@@ -41,7 +41,7 @@ public:
 
     size_t Size()const
     {
-        strlen(_sptr);
+       strlen(_sptr);
     }
 
     size_t Length()const
