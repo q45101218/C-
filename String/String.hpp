@@ -55,6 +55,49 @@ public:
         }
     }
 
+    void Insert(size_t pos,char s)
+    {
+        assert(pos<=_size);
+        if(_size==_capacity)
+        {
+            Expand(_capacity*2);
+        }
+        size_t end=_size;
+
+        while(end>=pos)
+        {
+            _str[end+1]=_str[end];
+            end--;
+        }
+        _str[pos]=s;
+        _size++;
+    }
+
+    void Insert(size_t pos,char* str)
+    {
+        assert(pos<=_size);
+        size_t len=strlen(str);
+        Expand(_size+len);
+        size_t end=_size;
+        while(end>=pos)
+        {
+            _str[end+len]=_str[end];
+            end--;
+        }
+        size_t index=0;
+        while(index<len)
+        {
+            _str[pos]=str[index];
+            index++;
+            pos++;
+        }
+        _size+=len;
+    }
+
+    void Append(const char* str)
+    {
+        Insert(_size,str);
+    }
 
     char* Getstr()
     {
@@ -87,6 +130,46 @@ public:
             delete[] _str;
             _str=tmp;
             _capacity=n;
+        }
+    }
+
+    char& operator[](size_t pos)
+    {
+        assert(pos<_size);
+        return _str[pos];
+    }
+
+    String& operator+=(const String& s)
+    {
+        Append(s._str);
+        return *this;
+    }
+
+    String operator+(const String& s)
+    {
+        String tmp(_str);
+        tmp.Append(s._str);
+        return tmp;
+    }
+
+    void Erase(size_t pos,size_t n)
+    {
+        assert(pos<_size)
+        if(pos+n>=_size)
+        {
+            _str[pos]=0;
+            _size=pos;
+        }
+        else
+        {
+            size_t index=pos+n;
+            while(index=<_size)
+            {
+                _str[pos]=_str[index];
+                pos++;
+                index++;
+            }
+            _size-=n;
         }
     }
 
