@@ -7,6 +7,8 @@
 
 #include<iostream>
 #include<string.h>
+#include<assert.h>
+#include<string>
 using namespace std;
 
 class String
@@ -14,16 +16,16 @@ class String
 public:
     String(const char* str="")
     :_size(strlen(str))
-    ,_capacity(size)
-    ,_str(new char [capacity+1])
     {
+        _capacity(_size)
+        _str(new char[_capacity+1])
         strcpy(_str,str);
     }
 
     String(const String& s)
-    :_size(strlen(s._size))
-    ,_capacity(_size)
-    ,_str(new char [_capacity+1])
+    :_size(s._size)
+    ,_capacity(s._capacity)
+    ,_str(new char[s._capacity+1])
     {
         strcpy(_str,s._str);
     }
@@ -73,7 +75,7 @@ public:
         _size++;
     }
 
-    void Insert(size_t pos,char* str)
+    void Insert(size_t pos,const char* str)
     {
         assert(pos<=_size);
         size_t len=strlen(str);
@@ -154,7 +156,7 @@ public:
 
     void Erase(size_t pos,size_t n)
     {
-        assert(pos<_size)
+        assert(pos<_size);
         if(pos+n>=_size)
         {
             _str[pos]=0;
@@ -163,7 +165,7 @@ public:
         else
         {
             size_t index=pos+n;
-            while(index=<_size)
+            while(index<=_size)
             {
                 _str[pos]=_str[index];
                 pos++;
@@ -171,6 +173,113 @@ public:
             }
             _size-=n;
         }
+    }
+
+    void PushBack(char s)
+    {
+        Insert(_size,s);
+    }
+
+    void PopBack()
+    {
+        assert(_size>0);
+        _size--;
+    }
+
+    bool operator>(const String& s)const
+    {
+        char* str1=_str;
+        char* str2=s._str;
+        while(*str1&&*str2)
+        {
+            if(*str1>*str)
+            {
+                return true;
+            }
+            else if(*str1<*str2)
+            {
+                return false;
+            }
+            else
+            {
+                str1++;
+                str2++;
+            }
+        }
+        if(*str2=='/0')
+            return true;
+        else
+        {
+            return false;
+        }
+    }
+    
+    bool operator>=(const String& s)const
+    {
+        char* str1=_str;
+        char* str2=s._str;
+        while(*_str1&&*_str2)
+        {
+            if(*str1>=*str2)
+                return true;
+            else
+            {
+                str1++;
+                str2++;
+            }
+        }
+        if(*str1=='/0')
+            return false;
+        else
+            return true;
+    }
+    
+    bool operator<(const String& s)const
+    {
+        char* str1=_str;
+        char* str2=s._str;
+        while(*str1&&*str2)
+        {
+            if(*str1<*str2)
+            {
+                return true;
+            }
+            else if(*str1>*str2)
+            {
+                return false;
+            }
+            else
+            {
+                str1++;
+                str2++;
+            }
+        }
+        if(*str1=='/0')
+            return true;
+        else
+            return false;
+    }
+
+    bool operator<=(const String& s)const
+    {
+        char* str1=_str;
+        char* str2=s._str;
+        while(*str1&&*str2)
+        {
+            if(*str1<*str2)
+                return true;
+            else if(*str1>*str2)
+                return false;
+            else
+            {
+                str1++;
+                str2++;
+            }
+        }
+        if(*str2=='/0')
+            return false;
+        else
+            return true;
     }
 
     void Print()const
