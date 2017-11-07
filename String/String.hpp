@@ -89,7 +89,7 @@ public:
         size_t index=0;
         while(index<len)
         {
-            _str[pos]=str[index];
+            _str[pos+index]=str[index];
             index++;
             pos++;
         }
@@ -183,7 +183,7 @@ public:
     void PopBack()
     {
         assert(_size>0);
-        _size--;
+        Erase(_size-1,1);
     }
 
     bool operator>(const String& s)const
@@ -206,11 +206,11 @@ public:
                 str2++;
             }
         }
-        if(*str2=='/0')
-            return true;
+        if(*str1=='/0')
+            return false;
         else
         {
-            return false;
+            return true;
         }
     }
     
@@ -228,10 +228,7 @@ public:
                 str2++;
             }
         }
-        if(*str1=='/0')
-            return false;
-        else
-            return true;
+        return true;
     }
     
     bool operator<(const String& s)const
@@ -254,10 +251,10 @@ public:
                 str2++;
             }
         }
-        if(*str1=='/0')
-            return true;
-        else
+        if(*str2=='/0')
             return false;
+        else
+            return true;
     }
 
     bool operator<=(const String& s)const
@@ -276,10 +273,7 @@ public:
                 str2++;
             }
         }
-        if(*str2=='/0')
-            return false;
-        else
-            return true;
+        return true;
     }
 
     void Print()const
