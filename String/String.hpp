@@ -17,8 +17,8 @@ public:
     String(const char* str="")
     :_size(strlen(str))
     {
-        _capacity(_size)
-        _str(new char[_capacity+1])
+        _capacity=_size;
+        _str=new char[_capacity+1];
         strcpy(_str,str);
     }
 
@@ -159,7 +159,7 @@ public:
         assert(pos<_size);
         if(pos+n>=_size)
         {
-            _str[pos]=0;
+            _str[pos]='\0';
             _size=pos;
         }
         else
@@ -206,7 +206,7 @@ public:
                 str2++;
             }
         }
-        if(*str1=='/0')
+        if(*str1=='\0')
             return false;
         else
         {
@@ -218,7 +218,7 @@ public:
     {
         char* str1=_str;
         char* str2=s._str;
-        while(*_str1&&*_str2)
+        while(*str1&&*str2)
         {
             if(*str1>=*str2)
                 return true;
@@ -251,7 +251,7 @@ public:
                 str2++;
             }
         }
-        if(*str2=='/0')
+        if(*str2=='\0')
             return false;
         else
             return true;
