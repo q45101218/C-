@@ -64,7 +64,7 @@ public:
         {
             (*(int*)_str)--;
             char* tmp=new char[_capacity+5];
-            *(int*)tmp=1;
+            (*(int*))tmp=1;
             strcpy((tmp-4),(_str-4));
             _str=tmp;
         }
@@ -302,6 +302,22 @@ public:
     size_t Size()const
     {
         return _size;
+    }
+
+    size_t Find(const char* str)
+    {
+        const char* str1=_str+4;
+        const char* str2=str;
+        while(*str1)
+        {
+            const char* p1=str1;
+            const char* p2=str2;
+            while(*p2&&*p1++==*p2++);
+            if(*p2=='\0')
+                return str1-_(str+4);
+            else
+            str1++;
+        }
     }
 
     void Print()const
