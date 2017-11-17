@@ -13,6 +13,12 @@ using namespace std;
 struct __TrueType{};
 struct __FalseType{};
 
+template<class T>
+struct TypeTraits
+{
+    typedef __FalseType __isPOD;
+};
+
 template<>
 struct TypeTraits<int>
 {
@@ -43,40 +49,33 @@ struct TypeTraits<size_t>
     typedef __TrueType __isPOD;
 };
 
-template<class T>
-struct TypeTraits
-{
-    typedef __FalseType __isPOD;
-};
 
 template<class T>
-T* _Copy(void* dest,const void* src,size_t size,__TrueType) 
+T* _Copy(T* dest,T* src,size_t size,__TrueType) 
 {
     return (T*)memcpy(dest,src,size);
 }
 
 template<class T>
-T* _Copy(void* dest,const void* src,size_t size,__FalseType) 
+T* _Copy(T* dest,T* src,size_t size,__FalseType) 
 {
-    T* d=(T*)dest;
-    T* s=(T*)src;
     for(int i=0;i<size;i++)
     {
-        d[i]=s[i];
+        dest[i]=src[i];
     }
-    return (T*)dest;
+    return dest;
 }
 
 template<class T>
-T* Copy(void* dest const void* src,size_t size)
+T* Copy(T* dest,T* src,size_t size)
 {
-    return _Copy(dest,src,size,TypeTraits::__isPOD);
+    return _Copy<T>(dest,src,size,TypeTraits<T>::__isPOD());
 }
 
 int main()
 {
-    char p1="12345";
-    char p2="98765";
-    Copy(p1,p2,strlen(p1));
-    retrun 0;
+    char p1[]="12345";
+    char p2[]="98765";
+    Copy<char>(p1,p2,strlen(p1));
+    return 0;
 }
