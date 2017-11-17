@@ -51,7 +51,7 @@ struct TypeTraits<size_t>
 
 
 template<class T>
-T* _Copy(T* dest,T* src,size_t size,__TrueType) 
+T* _Copy(T* dest,T* src,size_t size,__TrueType)
 {
     return (T*)memcpy(dest,src,size);
 }
@@ -69,7 +69,7 @@ T* _Copy(T* dest,T* src,size_t size,__FalseType)
 template<class T>
 T* Copy(T* dest,T* src,size_t size)
 {
-    return _Copy<T>(dest,src,size,TypeTraits<T>::__isPOD());
+    return _Copy<T>(dest,src,size,typename TypeTraits<T>::__isPOD());
 }
 
 int main()
