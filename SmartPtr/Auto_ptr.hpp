@@ -12,7 +12,7 @@ template<class T>
 class Auto_ptr
 {
 public:
-    Auto_ptr(const T* ptr=NULL)
+    Auto_ptr(T* const& ptr=NULL)
     :_ptr(ptr)
     {}
 
