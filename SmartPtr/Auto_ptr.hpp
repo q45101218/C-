@@ -7,7 +7,7 @@
 #pragma once
 
 #include<iostream>
-
+#include<assert.h>
 template<class T>
 class Auto_ptr
 {
@@ -46,11 +46,13 @@ public:
 
     T& operator*()
     {
+        assert(_ptr);
         return *_ptr;
     }
 
     T* operator->()
     {
+        assert(_ptr);
         return _ptr;
     }
 private:
