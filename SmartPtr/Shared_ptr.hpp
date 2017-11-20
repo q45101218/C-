@@ -5,6 +5,7 @@
 	> Created Time: Sat 18 Nov 2017 02:25:33 PM PST
  ************************************************************************/
 #pragma once
+#include"Weak_ptr.hpp"
 #include<assert.h>
 template<class T>
 class Shared_ptr
