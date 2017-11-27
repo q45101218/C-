@@ -21,6 +21,10 @@ public:
     {
         cout<<"A::A2()"<<endl;
     }
+    virtual void A3()
+    {
+        cout<<"A::A3()"<<endl;
+    }
 };
 
 class B:public A
@@ -41,10 +45,10 @@ public:
 int main()
 {
     A a;
-    B b;
+    //B b;
     int** ptra=(int**)(*(int**)&a);
-    int** ptr1=(int**)(*(int**)&b);
-    //print(ptra);
-    print(ptr1);
+    //int** ptr1=(int**)(*(int**)&b);
+    print(ptra);
+    //print(ptr1);
     return 0;
 }
