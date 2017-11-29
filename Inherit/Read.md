@@ -1,0 +1,5 @@
+![Image test](http://raw.github.com/q45101218/repositpry/CppTest/Inherit/1.png)
+![Image test](http://raw.github.com/q45101218/repositpry/CppTest/Inherit/2.png)
+![Image test](http://raw.github.com/q45101218/repositpry/CppTest/Inherit/3.png)
+![Image test](http://raw.github.com/q45101218/repositpry/CppTest/Inherit/4.png)
+![Image test](http://raw.github.com/q45101218/repositpry/CppTest/Inherit/5.png)
