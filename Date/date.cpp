@@ -28,6 +28,7 @@ public:
     {
         if(year<0 ||month<0 ||month>12||day<0||day>Days_in_monthofyear(year,month))
             perror("date legal");
+        return true;
     }
 
     int Days_in_monthofyear(int year,int month)
@@ -49,15 +50,57 @@ public:
 
     date operator--(int);
 
-    date& operator+(int days);
+    date operator+(int days)
+    {
+        date tmp(*this);
+        tmp._day+=days;
+        convertlegaldate(tmp._year,tmp._month,tmp._day);
+        return tmp;
+    }
 
-    date& operator+=(int days);
+    date& operator+=(int days)
+    {
+        return *this=operator+(days);
+    }
 
-    date& operator-(int days);
+    date operator-(int days)
+    {
+        return operator+(-days);
+    }
 
     date& operator-=(int days);
 
     int operator-(const date& d);
+
+    void convertlegaldate(int& year,int& month,int& days)
+    {
+        if(days>0)
+        {
+            while(days>=Days_in_monthofyear(year,month))
+            {
+                days-=Days_in_monthofyear(year,month++);
+                if(month>12)
+                {
+                    year++;
+                    month=1;
+                }
+            }
+        }
+        else
+        {
+            while(days<1)
+            {
+                month--;
+                if(month==0)
+                {
+                    year--;
+                    month=12;
+                }
+                days+=Days_in_monthofyear(year,month);
+            }
+        }
+    }
+
 
 private:
     int _day;
@@ -67,7 +110,7 @@ private:
 
 ostream& operator<<(ostream& in,const date& d)
 {
-    in<<d._year<<"-"<<d._month<<"-"<<d._day<<endl;
+    in<<d._year<<"-"<<d._month<<"-"<<d._day;
     return in;
 }
 
@@ -76,6 +119,10 @@ int main()
 {
     date d;
     cout<<d<<endl;
-    date d2(2001,2,29);
+    date d2(2001,2,22);
+    d=d2-100;
+    cout<<d<<endl;
+    d=d2+200;
+    cout<<d<<endl;
     return 0;
 }
